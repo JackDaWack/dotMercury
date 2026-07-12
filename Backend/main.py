@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request
 from authlib.integrations.starlette_client import OAuth
+import imaplib
 import sqlite3
 
 app = FastAPI()
 app.state.oauth = OAuth()
+mail = imaplib.IMAP4_SSL('imap.gmail.com')
 
 def init_db():
     conn = sqlite3.connect('database.db')
