@@ -1,11 +1,16 @@
-from fastapi import FastAPI, Request
-from authlib.integrations.starlette_client import OAuth
-import imaplib
 import sqlite3
+from email_validator import validate_email, EmailNotValidError
+import bcrypt
+from pydantic import BaseModel
 
-app = FastAPI()
-app.state.oauth = OAuth()
-mail = imaplib.IMAP4_SSL('imap.gmail.com')
+class Login_Data(BaseModel):
+    username: str
+    password: str
+
+class Register_Data(BaseModel):
+    username: str
+    email: str
+    password: str
 
 def init_db():
     conn = sqlite3.connect('database.db')
