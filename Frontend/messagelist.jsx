@@ -12,6 +12,7 @@ export default function MessageList({ messages, onSearch, onSelectMessage }) {
           <MessageRow
             key={message.id}
             message={message}
+            isOwnMessage={message.isOwnMessage}
             onSelect={onSelectMessage}
           />
         ))}
