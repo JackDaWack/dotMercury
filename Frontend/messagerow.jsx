@@ -7,6 +7,8 @@ export default function MessageRow({ message, isOwnMessage }) {
       <div className="message-header">
         <span>{message.sender}</span>
         <span>{message.date}</span>
+        <span>{message.isRead ? 'Read' : 'Unread'}</span>
+        <span>{message.isStarred ? 'Starred' : 'Not Starred'}</span>
       </div>
       <div className="message-content">
         <p>{message.preview}</p>
