@@ -1,3 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
+import AuthPage from './auth.jsx';
+
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('Root element not found.');
+}
+
+createRoot(rootElement).render(
+  <React.StrictMode>
+    <AuthPage />
+  </React.StrictMode>
+);
 
