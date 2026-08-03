@@ -46,6 +46,12 @@ def create_user(username: str, email: str, password: str):
     db.connection.commit()
     db.connection.close()
 
+def delete_user(username: str):
+    db = sqlite3.connect("users.db").cursor()
+    db.execute("DELETE FROM users WHERE username = ?", (username,))
+    db.connection.commit()
+    db.connection.close()
+
 @router.post("/login")
 def login(data: Login_Data):
     user = get_user(data.username)
@@ -67,3 +73,10 @@ def register(data: Register_Data):
         return {"success": False, "message": str(e)}
     create_user(data.username, data.email, bcrypt.hashpw(data.password.encode('utf-8'), bcrypt.gensalt()))
     return JSONResponse(content={"success": True, "message": "User registered successfully"})
+
+@router.post("/delete_user")
+def delete_user_route(username: str):
+    if get_user(username):
+        delete_user(username)
+        return JSONResponse(content={"success": True, "message": "User deleted successfully"})
+    return JSONResponse(content={"success": False, "message": "User not found"})
