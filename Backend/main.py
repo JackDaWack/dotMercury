@@ -20,3 +20,26 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+
+@app.get("/dotMercury_Login")
+def dotMercury_Login():
+    pass
+
+@app.get("/dotMercury_Register")
+def dotMercury_Register():
+    pass
+
+@app.get("/dotMercury_Logout")
+def dotMercury_Logout():
+    pass
+
+@app.get("/")
+def read_incoming_user(request: Request):
+    init_db()
+    incoming_user = request.cookies.get("user")
+    if not incoming_user:
+        print("No user cookie found. Redirecting to login page.")
+        return {"message": "Welcome! Please log in."}
+    print(f"Incoming user logged in: {incoming_user}")
+    return {"message": f"Welcome back, {incoming_user}!"}
+    

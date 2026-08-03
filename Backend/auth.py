@@ -6,6 +6,8 @@ from fastapi.responses import JSONResponse
 from email_validator import validate_email, EmailNotValidError
 import bcrypt
 
+router = APIRouter()
+
 class Login_Data(BaseModel):
     username: str
     password: str
@@ -44,6 +46,7 @@ def create_user(username: str, email: str, password: str):
     db.connection.commit()
     db.connection.close()
 
+@router.post("/login")
 def login(data: Login_Data):
     user = get_user(data.username)
     if user and bcrypt.checkpw(data.password.encode('utf-8'), user["password"]):
@@ -52,6 +55,7 @@ def login(data: Login_Data):
         return response
     return {"success": False}
 
+@router.post("/register")
 def register(data: Register_Data):
     if get_user(data.username):
         return JSONResponse(content={"success": False, "message": "Username already exists"})
