@@ -1,25 +1,13 @@
 from fastapi import FastAPI, Request
 from authlib.integrations.starlette_client import OAuth
 import imaplib
-import sqlite3
+import auth
+import database as db
 
 app = FastAPI()
+app.include_router(auth.router)
 app.state.oauth = OAuth()
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
-
-def init_db():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
-            email TEXT NOT NULL,
-            password BYTES NOT NULL
-        )
-    ''')
-    conn.commit()
-    conn.close()
 
 @app.get("/dotMercury_Login")
 def dotMercury_Login():
@@ -35,7 +23,7 @@ def dotMercury_Logout():
 
 @app.get("/")
 def read_incoming_user(request: Request):
-    init_db()
+    db.init_db()
     incoming_user = request.cookies.get("user")
     if not incoming_user:
         print("No user cookie found. Redirecting to login page.")
