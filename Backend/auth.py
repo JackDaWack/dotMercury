@@ -54,7 +54,7 @@ def login(data: dm.Login_Data):
     return {"success": False}
 
 @router.post("/register")
-def register(data: Register_Data):
+def register(data: dm.Register_Data):
     if get_user(data.username):
         return JSONResponse(content={"success": False, "message": "Username already exists"})
     if get_user(data.email):
