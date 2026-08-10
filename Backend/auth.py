@@ -5,17 +5,9 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from email_validator import validate_email, EmailNotValidError
 import bcrypt
+import data_models as dm
 
 router = APIRouter()
-
-class Login_Data(BaseModel):
-    username: str
-    password: str
-
-class Register_Data(BaseModel):
-    username: str
-    email: str
-    password: str
 
 def init_db():
     conn = sqlite3.connect('database.db')
@@ -53,7 +45,7 @@ def delete_user(username: str):
     db.connection.close()
 
 @router.post("/login")
-def login(data: Login_Data):
+def login(data: dm.Login_Data):
     user = get_user(data.username)
     if user and bcrypt.checkpw(data.password.encode('utf-8'), user["password"]):
         response = JSONResponse(content={"success": True})
