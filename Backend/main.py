@@ -21,7 +21,11 @@ def dotMercury_Register():
 def dotMercury_Logout():
     pass
 
-@app.get("/")
+@app.get("/api/hello_world")
+def hello_world():
+    return {"message": "Hello, World!"}
+
+#@app.get("/")
 def read_incoming_user(request: Request):
     db.init_db()
     incoming_user = request.cookies.get("user")
