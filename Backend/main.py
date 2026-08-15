@@ -3,11 +3,20 @@ from authlib.integrations.starlette_client import OAuth
 import imaplib
 import auth
 import database as db
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.include_router(auth.router)
 app.state.oauth = OAuth()
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/dotMercury_Login")
 def dotMercury_Login():
