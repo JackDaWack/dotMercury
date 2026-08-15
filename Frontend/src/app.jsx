@@ -11,7 +11,8 @@ function App() {
 
   return (
     <main>
-      <h1>My FastAPI + React App</h1>
+      <h1>Welcome to dotMercury!</h1>
+      <p>This app is currently under development. We appreciate your patience!</p>
       <p>{message}</p>
     </main>
   );
