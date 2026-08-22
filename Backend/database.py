@@ -1,8 +1,9 @@
+import os
 from typing import Optional
 from sqlalchemy import create_engine, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
-DATABASE_URL = "sqlite:///app.db"
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///app.db")
 engine = create_engine(DATABASE_URL, echo=True)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

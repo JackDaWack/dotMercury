@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request
 from authlib.integrations.starlette_client import OAuth
-import imaplib
 import auth
 import database as db
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,7 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.include_router(auth.router)
 app.state.oauth = OAuth()
-mail = imaplib.IMAP4_SSL('imap.gmail.com')
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],  # Frontend URL
@@ -33,6 +31,10 @@ def dotMercury_Logout():
 @app.get("/api/hello_world")
 def hello_world():
     return {"message": "Hello, World!"}
+
+@app.get("/")
+def foo():
+    print("Hello from the root endpoint!")
 
 #@app.get("/")
 def read_incoming_user(request: Request):
