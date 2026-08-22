@@ -3,9 +3,19 @@ import React, { useState, useEffect } from "react";
 function Register() {
     const [message, setMessage] = useState("");
     useEffect(() => {
-        fetch("http://localhost:8000/api/register")
-            .then(response => response.json())
-            .then(data => setMessage(data.message));
+        fetch("http://localhost:8000/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: "",
+                email: "",
+                password: ""
+            })
+        })
+        .then(response => response.json())
+        .then(data => setMessage(data.message));
     }, []);
     return (
         <main>     
