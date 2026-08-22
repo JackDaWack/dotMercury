@@ -28,16 +28,8 @@ def dotMercury_Register():
 def dotMercury_Logout():
     pass
 
-@app.get("/api/hello_world")
-def hello_world():
-    return {"message": "Hello, World!"}
-
-@app.get("/")
-def foo():
-    print("Hello from the root endpoint!")
-
-#@app.get("/")
-def read_incoming_user(request: Request):
+@app.get("/api/checking_request_data")
+def read_incoming_request(request: Request):
     db.init_db()
     incoming_user = request.cookies.get("user")
     if not incoming_user:
@@ -45,4 +37,10 @@ def read_incoming_user(request: Request):
         return {"message": "Welcome! Please log in."}
     print(f"Incoming user logged in: {incoming_user}")
     return {"message": f"Welcome back, {incoming_user}!"}
+
+@app.get("/")
+def foo():
+    print("Hello from the root endpoint!")
+
+
     

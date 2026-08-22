@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import Login from "./login.jsx";
 
 function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/hello_world")
+    fetch("http://localhost:8000/api/checking_request_data")
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((error) => {
@@ -13,11 +14,15 @@ function App() {
       });
   }, []);
 
+  if (message === "Welcome! Please log in.") {
+    return (
+      <Login />
+    );
+  }
   return (
     <main>
       <h1>Welcome to dotMercury!</h1>
       <p>This app is currently under development. We appreciate your patience!</p>
-      <p>Testing Backend: {message}</p>
     </main>
   );
 }
