@@ -10,7 +10,7 @@ import database as db
 
 router = APIRouter()
 
-@router.post("/login")
+@router.post("/api/login")
 def login(data: dm.Login_Data):
     user = db.get_user(data.email)
     if user and bcrypt.checkpw(data.password.encode('utf-8'), user["password"]):
@@ -19,7 +19,7 @@ def login(data: dm.Login_Data):
         return response
     return {"success": False}
 
-@router.post("/register")
+@router.post("/api/register")
 def register(data: dm.Register_Data):
     if db.get_user(data.email):
         return JSONResponse(content={"success": False, "message": "Email already exists"})
@@ -30,14 +30,14 @@ def register(data: dm.Register_Data):
     db.create_user(data.username, data.email, bcrypt.hashpw(data.password.encode('utf-8'), bcrypt.gensalt()))
     return JSONResponse(content={"success": True, "message": "User registered successfully"})
 
-@router.post("/delete_user")
+@router.post("/api/delete_user")
 def delete_user_route(email: str):
     if db.get_user(email):
         db.delete_user(email)
         return JSONResponse(content={"success": True, "message": "User deleted successfully"})
     return JSONResponse(content={"success": False, "message": "User not found"})
 
-@router.post("/update_user")
+@router.post("/api/update_user")
 def update_user_route(email: str, new_username: str = None, new_password: str = None):
     if db.get_user(email):
         if new_username:
