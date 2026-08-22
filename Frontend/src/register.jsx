@@ -8,7 +8,7 @@ function Register() {
             .then(data => setMessage(data.message));
     }, []);
     return (
-        <div>     
+        <main>     
             <h1>Register for dotMercury</h1>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" />
@@ -16,7 +16,7 @@ function Register() {
             <input type="email" id="email" name="email" />
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" />
-        </div>
+        </main>
     );
 }
 

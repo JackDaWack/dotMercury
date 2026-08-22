@@ -8,13 +8,13 @@ function Login() {
             .then(data => setMessage(data.message));
     }, []);
     return (
-        <div>     
+        <main>   
             <h1>Login to dotMercury</h1>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" />
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" />
-        </div>
+        </main>
     );
 }
 
