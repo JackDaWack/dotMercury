@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Login from "./login.jsx";
+import Register from "./register.jsx";
 
-function App() {
+function App({ authView }) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -15,9 +16,7 @@ function App() {
   }, []);
 
   if (message === "Welcome! Please log in.") {
-    return (
-      <Login />
-    );
+    return authView === "register" ? <Register /> : <Login />;
   }
   return (
     <main>
