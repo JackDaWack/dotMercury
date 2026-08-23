@@ -5,6 +5,8 @@ function Header({ authView, onAuthViewChange }) {
       <nav>
         <select value={authView} onChange={(event) => onAuthViewChange(event.target.value)}>
           <option>--Navigation--</option>
+          <option value="inbox">Inbox</option>
+          <option value="settings">Settings</option>
           <option value="login">Login</option>
           <option value="register">Register</option>
         </select>
