@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 function Login() {
     const [message, setMessage] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     useEffect(() => {
         fetch("http://localhost:8000/api/login", {
             method: "POST",
@@ -9,8 +11,8 @@ function Login() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: "user@example.com",
-                password: "password"
+                email: email,
+                password: password
             })
         })
             .then(response => response.json())
@@ -20,9 +22,9 @@ function Login() {
         <main>   
             <h1>Login to dotMercury</h1>
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" />
+            <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
+            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Login</button>
         </main>
     );

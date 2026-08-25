@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 function Register() {
     const [message, setMessage] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     useEffect(() => {
         fetch("http://localhost:8000/api/register", {
             method: "POST",
@@ -9,9 +12,9 @@ function Register() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: "",
-                email: "",
-                password: ""
+                username: username,
+                email: email,
+                password: password
             })
         })
         .then(response => response.json())
@@ -21,11 +24,11 @@ function Register() {
         <main>     
             <h1>Register for dotMercury</h1>
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" />
+            <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" />
+            <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
+            <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Register</button>
         </main>
     );
