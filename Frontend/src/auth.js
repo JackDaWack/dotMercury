@@ -16,3 +16,21 @@ async function login() {
     }
     catch(err){console.error("Error calling backend:", err);}
 }
+
+async function register() {
+    try {
+        const username = document.querySelector("#username").value;
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+        const response = await fetch("/register", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username,email,password})})
+        const data = await response.json();
+        console.log("Server response:", data);
+        if (data.success) {
+            window.location.href = "/login-page";
+        } else {
+            alert(data.message || "Registration failed");
+        }
+    }
+    catch(err){console.error("Error calling backend:", err);}
+
+}

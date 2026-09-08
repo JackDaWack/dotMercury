@@ -30,6 +30,7 @@ function Register() {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Register</button>
+            <script>auth.register();</script>
         </main>
     );
 }
