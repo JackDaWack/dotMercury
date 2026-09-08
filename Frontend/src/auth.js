@@ -1,8 +1,8 @@
 async function login() {
     try {
-        const email = document.querySelector("#login-form #email").value;
-        const password = document.querySelector("#login-form #password").value;
-        const response = await fetch("/login", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({username,password})})
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+        const response = await fetch("/login", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({email, password})})
         if (!response.ok) {
             throw new Error("User login request failed");
         }
