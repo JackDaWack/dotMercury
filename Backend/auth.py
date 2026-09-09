@@ -1,6 +1,3 @@
-import sqlite3
-from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from email_validator import validate_email, EmailNotValidError

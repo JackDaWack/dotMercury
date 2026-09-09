@@ -24,6 +24,12 @@ function Register() {
 
             const data = await response.json();
             setMessage(data.message || (data.success ? "User registered successfully" : "Registration failed"));
+            if (data.success) {
+                // Redirect to the login page or another page after successful registration
+                window.location.href = "/login"; // Change this to your desired route
+            } else {
+                setMessage(data.message || "Registration failed");
+            }
         } catch (error) {
             setMessage("Unable to reach the server.");
         }

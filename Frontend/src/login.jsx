@@ -22,6 +22,12 @@ function Login() {
 
             const data = await response.json();
             setMessage(data.success ? "Login successful" : (data.message || "Invalid email or password"));
+            if (data.success) {
+                // Redirect to the dashboard or another page after successful login
+                window.location.href = "/"; // Change this to your desired route
+            } else {
+                setMessage(data.message || "Invalid email or password");
+            }
         } catch (error) {
             setMessage("Unable to reach the server.");
         }
