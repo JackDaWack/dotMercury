@@ -14,9 +14,9 @@ router = APIRouter()
 def login(data: dm.Login_Data):
     try:
         user = db.get_user(data.email)
-        if user and bcrypt.checkpw(data.password.encode('utf-8'), user["password"]):
+        if user and bcrypt.checkpw(data.password.encode('utf-8'), user.password):
             response = JSONResponse(content={"success": True})
-            response.set_cookie(key="user", value=user["username"])
+            response.set_cookie(key="user", value=user.username)
             return response
         return {"success": False}
     except Exception as e:
