@@ -11,15 +11,12 @@ function Login() {
         try {
             const response = await fetch("http://localhost:8000/api/login", {
                 method: "POST",
+                credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
+                body: JSON.stringify({ email, password })
             });
-
             const data = await response.json();
             setMessage(data.success ? "Login successful" : (data.message || "Invalid email or password"));
             if (data.success) {

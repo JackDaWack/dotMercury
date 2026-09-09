@@ -5,6 +5,7 @@ import database as db
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
 app.include_router(auth.router)
 app.state.oauth = OAuth()
 app.add_middleware(

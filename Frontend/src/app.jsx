@@ -6,13 +6,15 @@ function App({ authView }) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/checking_request_data")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => {
-        console.error("Error fetching message:", error);
-        setMessage("Error: " + error.message);
-      });
+    fetch("http://localhost:8000/api/checking_request_data", {
+  credentials: "include"
+  })
+    .then((res) => res.json())
+    .then((data) => setMessage(data.message))
+    .catch((error) => {
+      console.error("Error fetching message:", error);
+      setMessage("Error: " + error.message);
+    });
   }, []);
 
   if (message === "Welcome! Please log in.") {
