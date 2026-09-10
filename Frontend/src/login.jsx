@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Login() {
+function Login({ authView, onAuthViewChange }) {
     const [message, setMessage] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -33,7 +33,7 @@ function Login() {
     return (
         <main>
             <h1>Login to dotMercury</h1>
-            <a href="http://localhost:8000/api/register">Don't have an account? Register here.</a>
+            <button value={authView} onClick={() => onAuthViewChange("register")}>Don't have an account? Register here.</button>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />

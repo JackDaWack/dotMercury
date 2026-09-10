@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Login from "./login.jsx";
 import Register from "./register.jsx";
 
-function App({ authView }) {
+function App({ authView, onAuthViewChange }) {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function App({ authView }) {
   }, []);
 
   if (message === "Welcome! Please log in.") {
-    return authView === "register" ? <Register /> : <Login />;
+    return authView === "register" ? <Register authView={authView} onAuthViewChange={onAuthViewChange} /> : <Login authView={authView} onAuthViewChange={onAuthViewChange} />;
   }
   return (
     <main>
