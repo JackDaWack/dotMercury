@@ -3,13 +3,9 @@ function Header({ authView, onAuthViewChange }) {
     <header>
       <h1>dotMercury</h1>
       <nav>
-        <select value={authView} onChange={(event) => onAuthViewChange(event.target.value)}>
-          <option>--Navigation--</option>
-          <option value="inbox">Inbox</option>
-          <option value="settings">Settings</option>
-          <option value="login">Login</option>
-          <option value="register">Register</option>
-        </select>
+        <a>Mail</a>
+        <a>Settings</a>
+        <a id="logoutBtn">Logout</a>
       </nav>
     </header>
   );

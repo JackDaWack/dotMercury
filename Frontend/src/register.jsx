@@ -38,6 +38,7 @@ function Register() {
     return (
         <main>
             <h1>Register for dotMercury</h1>
+            <a href="http://localhost:8000/api/login">Already have an account? Login here.</a>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
