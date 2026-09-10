@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from authlib.integrations.starlette_client import OAuth
+from fastapi.responses import JSONResponse
 import auth
 import database as db
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,18 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/dotMercury_Login")
-def dotMercury_Login():
-    pass
-
-@app.get("/dotMercury_Register")
-def dotMercury_Register():
-    pass
-
-@app.get("/dotMercury_Logout")
-def dotMercury_Logout():
-    pass
+@app.post("/api/logout")
+def logout():
+    response = JSONResponse(content={"success": True, "message": "Logged out successfully"})
+    response.delete_cookie(key="user", path="/")
+    return response
 
 @app.get("/api/checking_request_data")
 def read_incoming_request(request: Request):
