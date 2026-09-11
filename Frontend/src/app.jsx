@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Login from "./login.jsx";
-import Register from "./register.jsx";
+import Login from "./auth/login.jsx";
+import Register from "./auth/register.jsx";
 
 function App({ authView, onAuthViewChange }) {
   const [message, setMessage] = useState("");
