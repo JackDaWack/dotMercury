@@ -1,6 +1,10 @@
-function Header({ authView, onAuthViewChange }) {
+import React from "react";
+import "./header.css";
+
+function Header() {
   return (
     <header>
+      <link rel="stylesheet" href="./header.css" />
       <h1>dotMercury</h1>
       <nav>
         <a>Mail</a>

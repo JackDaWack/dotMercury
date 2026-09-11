@@ -11,7 +11,7 @@ function Root() {
 
   return (
     <StrictMode>
-      <Header authView={authView} onAuthViewChange={setAuthView} />
+      <Header />
       <App authView={authView} onAuthViewChange={setAuthView}/>
       <Footer />
     </StrictMode>
