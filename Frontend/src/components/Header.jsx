@@ -2,22 +2,26 @@ import React from "react";
 import "./header.css";
 
 function Header() {
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      fetch("http://localhost:8000/api/logout", {
+      const response = await fetch("http://localhost:8000/api/logout", {
         method: "POST",
-        headers: {
         credentials: "include",
-          headers: {
+        headers: {
           "Content-Type": "application/json"
-         }
         }
       });
+
+      if (!response.ok) {
+        throw new Error(`Logout failed with status ${response.status}`);
+      }
+
       localStorage.removeItem("token");
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error during logout:", error);
     }
-  }
+  };
   return (
     <header>
       <link rel="stylesheet" href="./header.css" />

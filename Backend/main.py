@@ -19,7 +19,9 @@ app.add_middleware(
 
 @app.post("/api/logout")
 def logout():
-    return JSONResponse(content={"success": True}).delete_cookie(key="user")
+    response = JSONResponse(content={"success": True})
+    response.delete_cookie(key="user", path="/")
+    return response
 
 @app.get("/api/checking_request_data")
 def read_incoming_request(request: Request):

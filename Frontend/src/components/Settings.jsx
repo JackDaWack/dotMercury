@@ -1,6 +1,7 @@
 import react, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SetNewPassword from './SetNewPassword';
+import DeleteAccount from './DeleteAccount';
 
 function Settings() {
   const [username, setUsername] = useState('');
@@ -12,6 +13,7 @@ function Settings() {
     <main>
       <h1>Settings</h1>
         <SetNewPassword />
+        <DeleteAccount />
     </main>
   )
 }
