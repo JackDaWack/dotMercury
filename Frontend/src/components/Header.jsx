@@ -17,7 +17,7 @@ function Header() {
       }
 
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      window.location.reload(); // Reload the page to reflect the logout state
     } catch (error) {
       console.error("Error during logout:", error);
     }
