@@ -22,13 +22,16 @@ function Header() {
       console.error("Error during logout:", error);
     }
   };
+  const handleSettingsClick = () => {
+    window.location.href = "/settings"; // Navigate to the settings page
+  }
   return (
     <header>
       <link rel="stylesheet" href="./header.css" />
       <h1>dotMercury</h1>
       <nav>
         <a>Mail</a>
-        <a>Settings</a>
+        <a onClick={handleSettingsClick}>Settings</a>
         <a onClick={handleLogout}>Logout</a>
       </nav>
     </header>
