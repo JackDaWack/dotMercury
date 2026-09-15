@@ -1,5 +1,4 @@
 import react, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function SetNewPassword() {
   const [password, setPassword] = useState('');
