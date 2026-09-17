@@ -1,7 +1,6 @@
 import React from "react";
 import "./header.css";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Settings from "./Settings.jsx";
+import { Link } from 'react-router-dom'
 
 function Header() {
   const handleLogout = async () => {
@@ -19,26 +18,22 @@ function Header() {
       }
 
       localStorage.removeItem("token");
-      window.location.reload(); // Reload the page to reflect the logout state
+      window.location.reload();
     } catch (error) {
       console.error("Error during logout:", error);
     }
   };
+
   return (
     <header>
-      <link rel="stylesheet" href="./header.css" />
       <h1>dotMercury</h1>
-      <Router>
-        <nav>
-          <link to="/">Home</link>
-          <link to="/settings">Settings</link>
-        </nav>
-        <Routes>
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Router>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/settings">Settings</Link>
+      </nav>
       <button onClick={handleLogout}>Logout</button>
     </header>
   );
 }
+
 export default Header;
