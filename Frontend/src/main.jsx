@@ -19,7 +19,7 @@ function Root() {
             <App authView={authView} onAuthViewChange={setAuthView} />
           </Route>
           <Route path="/settings">
-            <Settings />
+            <Settings authView={authView} onAuthViewChange={setAuthView} />
           </Route>
         </Switch>
         <Footer />
