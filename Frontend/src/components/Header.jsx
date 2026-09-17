@@ -1,5 +1,7 @@
 import React from "react";
 import "./header.css";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Settings from "./Settings.jsx";
 
 function Header() {
   const handleLogout = async () => {
@@ -22,18 +24,20 @@ function Header() {
       console.error("Error during logout:", error);
     }
   };
-  const handleSettingsClick = () => {
-    window.location.href = "/settings"; // Navigate to the settings page
-  }
   return (
     <header>
       <link rel="stylesheet" href="./header.css" />
       <h1>dotMercury</h1>
-      <nav>
-        <a>Mail</a>
-        <a onClick={handleSettingsClick}>Settings</a>
-        <a onClick={handleLogout}>Logout</a>
-      </nav>
+      <Router>
+        <nav>
+          <link to="/">Home</link>
+          <link to="/settings">Settings</link>
+        </nav>
+        <Routes>
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Router>
+      <button onClick={handleLogout}>Logout</button>
     </header>
   );
 }

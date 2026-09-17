@@ -1,6 +1,6 @@
 import react, { useState } from 'react';
 import SetNewPassword from './SetNewPassword';
-import DeleteAccount from './DeleteAccount';
+import DeleteAccount from './DeleteAccount'
 
 function Settings() {
   const [username, setUsername] = useState('');
