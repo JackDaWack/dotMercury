@@ -5,7 +5,7 @@ function SetNewPassword() {
   const [new_password, setNewPassword] = useState('');
   return (
     <div>
-      <h1>Settings</h1>
+      <h2>Password Settings</h2>
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <label htmlFor="new_password">New Password:</label>
