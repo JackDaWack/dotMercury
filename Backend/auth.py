@@ -37,10 +37,11 @@ def register(data: dm.Register_Data):
     return JSONResponse(content={"success": True, "message": "User registered successfully"})
 
 @router.post("/api/delete_user")
-def delete_user_route(email: str):
-    if db.get_user(email):
-        db.delete_user(email)
-        return JSONResponse(content={"success": True, "message": "User deleted successfully"})
+def delete_user_route(data: dm.User_Deletion_Data):
+    if db.get_user(data.email):
+        if bcrypt.checkpw(data.password.encode('utf-8'), db.get_user(data.email).password):
+            db.delete_user(data.email)
+            return JSONResponse(content={"success": True, "message": "User deleted successfully"})
     return JSONResponse(content={"success": False, "message": "User not found"})
 
 @router.post("/api/update_user")
