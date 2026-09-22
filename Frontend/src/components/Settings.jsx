@@ -10,17 +10,16 @@ function Settings({ authView, onAuthViewChange }) {
 
   const [message, setMessage] = useState("");
   
-    useEffect(() => {
-      fetch("http://localhost:8000/api/checking_request_data", {
-    credentials: "include"
-    })
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => {
-        console.error("Error fetching message:", error);
-        setMessage("Error: " + error.message);
-      });
-    }, []);
+    try {
+        const response = await fetch("http://localhost:8000/api/checking_request_data", {
+            method: "POST",
+            credentials: "include"
+        });
+        const data = await response.json();
+        setMessage(data.success ? "Settings updated successfully" : (data.message || "Failed to update settings"));
+    } catch (error) {
+        setMessage("Unable to reach the server.");
+    }
 
   if (message === "Welcome! Please log in.") {
     return authView === "register" ? <Register authView={authView} onAuthViewChange={onAuthViewChange} /> : <Login authView={authView} onAuthViewChange={onAuthViewChange} />;

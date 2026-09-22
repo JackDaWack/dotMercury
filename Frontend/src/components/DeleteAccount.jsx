@@ -36,7 +36,7 @@ function DeleteAccount() {
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit">Confirm Delete Account</button>
-      </form>
+      </form> 
     </div>
   )
 }
