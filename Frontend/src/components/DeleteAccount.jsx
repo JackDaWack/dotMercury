@@ -3,13 +3,15 @@ import react, { useState } from 'react';
 
 function DeleteAccount() {
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleDelete = async (event) => {
         event.preventDefault();
 
         try {
             const response = await fetch("http://localhost:8000/api/delete_user", {
-                method: "POST",
+                method: "DELETE",
                 credentials: "include",
                 headers: {
                 "Content-Type": "application/json"
@@ -19,8 +21,7 @@ function DeleteAccount() {
             const data = await response.json();
             setMessage(data.success ? "Account deleted successfully" : (data.message || "Failed to delete account"));
             if (data.success) {
-                // Redirect to the dashboard or another page after successful login
-                window.location.href = "/";
+                window.location.href ="/";
                 localStorage.removeItem("token");
                 window.location.reload();
             } else {
@@ -37,6 +38,8 @@ function DeleteAccount() {
       <form onSubmit={handleDelete}>
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <button type="submit">Confirm Delete Account</button>
       </form> 
     </div>
