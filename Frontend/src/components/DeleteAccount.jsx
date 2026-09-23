@@ -20,7 +20,9 @@ function DeleteAccount() {
             setMessage(data.success ? "Account deleted successfully" : (data.message || "Failed to delete account"));
             if (data.success) {
                 // Redirect to the dashboard or another page after successful login
-                window.location.href = "/"; // Change this to your desired route
+                window.location.href = "/";
+                localStorage.removeItem("token");
+                window.location.reload();
             } else {
                 setMessage(data.message || "Failed to delete account");
             }

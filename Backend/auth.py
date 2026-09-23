@@ -36,7 +36,7 @@ def register(data: dm.Register_Data):
     db.create_user(data.username, data.email, bcrypt.hashpw(data.password.encode('utf-8'), bcrypt.gensalt()))
     return JSONResponse(content={"success": True, "message": "User registered successfully"})
 
-@router.post("/api/delete_user")
+@router.delete("/api/delete_user")
 def delete_user_route(data: dm.User_Deletion_Data):
     if db.get_user(data.email):
         if bcrypt.checkpw(data.password.encode('utf-8'), db.get_user(data.email).password):
