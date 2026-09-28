@@ -22,6 +22,7 @@ function DeleteAccount() {
             setMessage(data.success ? "Account deleted successfully" : (data.message || "Failed to delete account"));
             if (data.success) {
                 localStorage.removeItem("token");
+                window.location.href = "/login";
                 window.location.reload();
             } else {
                 setMessage(data.message || "Failed to delete account");
