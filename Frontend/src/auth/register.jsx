@@ -25,8 +25,8 @@ function Register({ authView, onAuthViewChange }) {
             const data = await response.json();
             setMessage(data.message || (data.success ? "User registered successfully" : "Registration failed"));
             if (data.success) {
-                // Redirect to the login page or another page after successful registration
-                window.location.href = "/login"; // Change this to your desired route
+                window.location.href = "/";
+                window.location.reload();
             } else {
                 setMessage(data.message || "Registration failed");
             }
