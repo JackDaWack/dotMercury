@@ -41,10 +41,7 @@ def delete_user_route(data: dm.User_Deletion_Data):
     if db.get_user(data.email):
         if bcrypt.checkpw(data.password.encode('utf-8'), db.get_user(data.email).password):
             response = JSONResponse(content={"success": True, "message": "Account deleted successfully"})
-            response.delete_cookie(
-                key="user",
-                path="/"
-            )
+            response.delete_cookie(key="user", path="/")
             db.delete_user(data.email)
             return response     
     return JSONResponse(content={"success": False, "message": "User not found"})
