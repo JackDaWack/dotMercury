@@ -21,9 +21,8 @@ function DeleteAccount() {
             const data = await response.json();
             setMessage(data.success ? "Account deleted successfully" : (data.message || "Failed to delete account"));
             if (data.success) {
-                localStorage.removeItem("token");
                 window.location.href = "/";
-                window.location.reload();
+                localStorage.removeItem("token");
             } else {
                 setMessage(data.message || "Failed to delete account");
             }
