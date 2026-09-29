@@ -30,8 +30,10 @@ function Header() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/settings">Settings</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+        <button onClick={handleLogout}>Logout</button>
       </nav>
-      <button onClick={handleLogout}>Logout</button>
     </header>
   );
 }
