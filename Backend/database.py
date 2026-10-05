@@ -28,6 +28,12 @@ def get_user(email: str) -> Optional[User]:
     session.close()
     return user
 
+def get_user_by_id(user_id: int) -> Optional[User]:
+    session = SessionLocal()
+    user = session.query(User).filter(User.id == user_id).first()
+    session.close()
+    return user
+
 def create_user(username: str, email: Optional[str], password: bytes) -> User:
     session = SessionLocal()
     new_user = User(username=username, email=email, password=password)
@@ -37,9 +43,9 @@ def create_user(username: str, email: Optional[str], password: bytes) -> User:
     session.close()
     return new_user
 
-def delete_user(email: str) -> bool:
+def delete_user(user_id: int) -> bool:
     session = SessionLocal()
-    user = session.query(User).filter(User.email == email).first()
+    user = session.query(User).filter(User.id == user_id).first()
     if user:
         session.delete(user)
         session.commit()

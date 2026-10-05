@@ -20,18 +20,31 @@ app.add_middleware(
 @app.post("/api/logout")
 def logout():
     response = JSONResponse(content={"success": True})
-    response.delete_cookie(key="user", path="/")
+    response.delete_cookie(key="user_id", path="/")
+    response.delete_cookie(key="csrf_token", path="/")
     return response
+
 
 @app.get("/api/checking_request_data")
 def read_incoming_request(request: Request):
     db.init_db()
-    incoming_user = request.cookies.get("user")
-    if not incoming_user:
+    incoming_user_id = request.cookies.get("user_id")
+    if not incoming_user_id:
         print("No user cookie found. Redirecting to login page.")
         return {"message": "Welcome! Please log in."}
-    print(f"Incoming user logged in: {incoming_user}")
-    return {"message": f"Welcome back, {incoming_user}!"}
+
+    try:
+        incoming_user = db.get_user_by_id(int(incoming_user_id))
+    except ValueError:
+        incoming_user = None
+
+    if incoming_user is None:
+        print("The user session is invalid.")
+        return {"message": "Welcome! Please log in."}
+
+    print(f"Incoming user logged in: {incoming_user.username}")
+    return {"message": f"Welcome back, {incoming_user.username}!"}
+
 
 @app.get("/")
 def foo():

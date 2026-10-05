@@ -10,5 +10,5 @@ class Register_Data(BaseModel):
     password: str
 
 class User_Deletion_Data(BaseModel):
-    email: str
     password: str
+    confirmation: str
