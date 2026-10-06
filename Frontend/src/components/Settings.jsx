@@ -1,7 +1,8 @@
-import react from "react";
 import { useEffect, useState } from "react";
+import Login from "../auth/login.jsx";
+import Register from "../auth/register.jsx";
 import SetNewPassword from './SetNewPassword';
-import DeleteAccount from './DeleteAccount'
+import DeleteAccount from './DeleteAccount';
 
 function Settings({ authView, onAuthViewChange }) {
   const [username, setUsername] = useState('');

@@ -12,3 +12,8 @@ class Register_Data(BaseModel):
 class User_Deletion_Data(BaseModel):
     password: str
     confirmation: str
+
+class Password_Change_Data(BaseModel):
+    current_password: str
+    new_password: str
+    confirm_new_password: str
