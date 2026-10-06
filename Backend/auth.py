@@ -101,12 +101,26 @@ def delete_user_route(
     return response
 
 
-@router.post("/api/update_user")
-def update_user_route(email: str, new_username: str = None, new_password: str = None):
-    if db.get_user(email):
-        if new_username:
-            db.update_user(email, new_username=new_username)
-        if new_password:
-            db.update_user(email, new_password=bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt()))
-        return JSONResponse(content={"success": True, "message": "User updated successfully"})
-    return JSONResponse(content={"success": False, "message": "User not found"})
+@router.post("/api/change_password")
+def change_password_route(
+    request: Request,
+    data: dm.Password_Change_Data,
+    x_csrf_token: str = Header(None),
+):
+    require_csrf(request, x_csrf_token)
+    user = get_authenticated_user(request)
+
+    current_password = data.current_password.encode("utf-8")
+    new_password = data.new_password.encode("utf-8")
+    if len(current_password) > 72 or len(new_password) > 72:
+        raise HTTPException(status_code=400, detail="Passwords must be 72 bytes or fewer")
+    if not bcrypt.checkpw(current_password, user.password):
+        raise HTTPException(status_code=401, detail="Current password is incorrect")
+    if data.new_password != data.confirm_new_password:
+        raise HTTPException(status_code=400, detail="New passwords do not match")
+    if bcrypt.checkpw(new_password, user.password):
+        raise HTTPException(status_code=400, detail="New password must be different")
+    if not db.update_password(user.id, bcrypt.hashpw(new_password, bcrypt.gensalt())):
+        raise HTTPException(status_code=404, detail="Account not found")
+
+    return JSONResponse(content={"success": True, "message": "Password changed successfully"})
