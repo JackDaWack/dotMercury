@@ -1,8 +1,11 @@
+import os
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import smtplib
 from email.message import EmailMessage
+from bird import Bird
 
+bird = Bird(api_key=os.environ.get("BIRD_API_KEY"))
 router = APIRouter()
 
 @router.get("/api/get_messages")
@@ -10,12 +13,12 @@ def get_messages():
     # Placeholder for fetching messages from the database
     messages = [
         {"id": 1, "sender": "user1", "subject": "Hello", "body": "How are you?"},
-        {"id": 2, "sender": "user2", "subject": "Meeting", "body": "Let's schedule a meeting."},
-    ]   
+        {"id": 2, "sender": "user2", "subject": "Meeting", "body": "Let's schedule a meeting."}
+    ]  
     return {"success": True, "messages": messages}
 
-@router.get("/api/get_message/{message_id}")
-def get_message(message_id: int):
+@router.get("/api/view_message/{message_id}")
+def view_message(message_id: int):
     # Placeholder for fetching a specific message from the database
     message = {"id": message_id, "sender": "user1", "subject": "Hello", "body": "How are you?"}
     return {"success": True, "message": message}
