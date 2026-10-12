@@ -6,6 +6,7 @@ import App from './app.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Settings from './components/Settings.jsx'
+import Inbox from './Inbox.jsx'
 
 function Root() {
   const [authView, setAuthView] = useState('login')
@@ -17,6 +18,9 @@ function Root() {
         <Switch>
           <Route exact path="/">
             <App authView={authView} onAuthViewChange={setAuthView} />
+          </Route>
+          <Route path="/inbox">
+            <Inbox />
           </Route>
           <Route path="/settings">
             <Settings authView={authView} onAuthViewChange={setAuthView} />

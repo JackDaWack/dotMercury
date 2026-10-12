@@ -25,10 +25,11 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="site-header">
       <h1>dotMercury</h1>
       <nav>
         <Link to="/">Home</Link>
+        <Link to="/inbox">Inbox</Link>
         <Link to="/settings">Settings</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
