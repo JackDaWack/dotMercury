@@ -3,9 +3,15 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import smtplib
 from email.message import EmailMessage
-from bird import Bird
+from msgraph import GraphServiceClient
+from azure.identity import ClientSecretCredential
 
-bird = Bird(api_key=os.environ.get("BIRD_API_KEY"))
+credential = ClientSecretCredential(
+    tenant_id=os.environ.get("AZURE_TENANT_ID"),
+    client_id=os.environ.get("AZURE_CLIENT_ID"),
+    client_secret=os.environ.get("AZURE_CLIENT_SECRET")
+)
+graph_client = GraphServiceClient(credential=credential)
 router = APIRouter()
 
 @router.get("/api/get_messages")
