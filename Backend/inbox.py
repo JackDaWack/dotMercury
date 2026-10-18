@@ -16,29 +16,28 @@ router = APIRouter()
 
 @router.get("/api/get_messages")
 def get_messages():
-    # Placeholder for fetching messages from the database
-    messages = [
-        {"id": 1, "sender": "user1", "subject": "Hello", "body": "How are you?"},
-        {"id": 2, "sender": "user2", "subject": "Meeting", "body": "Let's schedule a meeting."}
-    ]  
+    messages = graph_client.me.messages.get()
     return {"success": True, "messages": messages}
 
 @router.get("/api/view_message/{message_id}")
 def view_message(message_id: int):
-    # Placeholder for fetching a specific message from the database
-    message = {"id": message_id, "sender": "user1", "subject": "Hello", "body": "How are you?"}
+    message = graph_client.me.messages[message_id].get()
     return {"success": True, "message": message}
 
 @router.post("/api/send_message")
 def send_message(message: dict):
-    # Placeholder for sending a message via email
     try:
         msg = EmailMessage()
-        msg.set_content(message["body"])
-        msg["Subject"] = message["subject"]
-        msg["From"] = "<EMAIL>"
-        msg["To"] = message["recipient"]
-        # Placeholder for email sending logic
-        return {"success": True}
+        msg.set_content(message.get("body", ""))
+        msg["Subject"] = message.get("subject", "")
+        msg["From"] = message.get("from", "")
+        msg["To"] = message.get("to", "")
+
+        with smtplib.SMTP("smtp.office365.com", 587) as server:
+            server.starttls()
+            server.login(os.environ.get("EMAIL_ADDRESS"), os.environ.get("EMAIL_PASSWORD"))
+            server.send_message(msg)
+
+        return {"success": True, "message": "Email sent successfully."}
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        return JSONResponse(status_code=500, content={"success": False, "error": str(e)})

@@ -6,7 +6,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite:////app/data/app.db
+      DATABASE_URL: sqlite:////app/data/app.db
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID:?Set AZURE_TENANT_ID before starting the backend}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID:?Set AZURE_CLIENT_ID before starting the backend}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET:?Set AZURE_CLIENT_SECRET before starting the backend}
     volumes:
       - ./Backend:/app
       - db:/app/data
