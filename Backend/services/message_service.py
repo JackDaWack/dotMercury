@@ -7,6 +7,7 @@ async def list_messages(
     folder_id: str = "inbox",
     limit: int = 25,
 ) -> list[EmailMessage]:
+
     result = await graph.get_messages(
         folder_id=folder_id,
         limit=limit,
@@ -15,6 +16,7 @@ async def list_messages(
     messages = []
 
     for item in result.get("value", []):
+
         sender_data = (
             item.get("from", {}).get("emailAddress") or {}
         )

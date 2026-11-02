@@ -6,11 +6,12 @@ class Settings(BaseSettings):
     environment: str = "development"
     graph_base_url: str = "https://graph.microsoft.com/v1.0"
 
+    graph_access_token: str | None = None
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
-
 
 settings = Settings()
