@@ -25,6 +25,8 @@ async def get_messages(
         )
 
     except httpx.HTTPStatusError as exc:
+        print("Graph status:", exc.response.status_code)
+        print("Graph response:", exc.response.text)
         raise HTTPException(
             status_code=502,
             detail="Microsoft Graph returned an error",

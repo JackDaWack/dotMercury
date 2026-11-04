@@ -1,5 +1,5 @@
-from app.graph.client import GraphClient
-from app.schemas.message import EmailAddress, EmailMessage
+from graph.client import GraphClient
+from schemas.message import EmailAddress, EmailMessage
 
 
 async def list_messages(

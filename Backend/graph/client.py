@@ -3,7 +3,7 @@ from msgraph import GraphServiceClient
 from azure.identity import InteractiveBrowserCredential
 import httpx
 
-from app.config import settings
+from config import settings
 
 
 class GraphClient:
