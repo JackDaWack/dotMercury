@@ -8,6 +8,7 @@ from config import settings
 
 class GraphClient:
     def __init__(self, access_token: str):
+        print(f"Initializing GraphClient with access token: {access_token}")
         self._client = httpx.AsyncClient(
             base_url=settings.graph_base_url,
             headers={
