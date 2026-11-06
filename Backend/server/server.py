@@ -1,9 +1,10 @@
 import msal
+from config import Settings
 
 # Your Entra ID registration details
-TENANT_ID = "your-tenant-id"
-CLIENT_ID = "your-client-id"
-CLIENT_SECRET = "your-client-secret"
+TENANT_ID = Settings().GRAPH_TENANT_ID
+CLIENT_ID = Settings().GRAPH_CLIENT_ID
+CLIENT_SECRET = Settings().GRAPH_CLIENT_SECRET
 
 # The authority URL for your tenant
 AUTHORITY = f"https://microsoftonline.com{TENANT_ID}"
