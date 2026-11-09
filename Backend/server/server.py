@@ -7,7 +7,7 @@ CLIENT_ID = Settings().GRAPH_CLIENT_ID
 CLIENT_SECRET = Settings().GRAPH_CLIENT_SECRET
 
 # The authority URL for your tenant
-AUTHORITY = f"https://microsoftonline.com{TENANT_ID}"
+AUTHORITY = f"https://microsoftonline.com/{TENANT_ID}"
 
 # For App-Only flow, the scope must be the default Graph endpoint
 SCOPES = ["https://microsoft.com"]
