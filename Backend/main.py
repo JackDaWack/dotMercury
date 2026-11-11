@@ -11,13 +11,15 @@ app.include_router(messages_router)
 @app.get("/")
 async def root():
     print("Application has started")
-    try:
-        token = server.get_app_access_token()
-        print("Access Token retrieved successfully!")
-        Settings().GRAPH_ACCESS_TOKEN = token
-
-    except Exception as e:
-        print(f"Failed to acquire access token: {e}")
+    if not Settings().GRAPH_ACCESS_TOKEN:
+        try:
+            token = server.get_app_access_token()
+            print("Access Token retrieved successfully!")
+            print("Access Token:", token)
+        except Exception as e:
+            print(f"Failed to acquire access token: {e}")
+    else:
+        print("Access Token successfully configured!")
     return {"message": "Welcome to the FastAPI application!"}
 
 @app.get("/health")
