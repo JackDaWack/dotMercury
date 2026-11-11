@@ -25,7 +25,9 @@ async def root():
 @app.get("/health")
 async def health_check():
     try:
+        print("Health check successful!")
         return {"status": "ok"}
     except Exception as e:
+        print(f"Health check failed: {e}")
         return {"status": "error", "message": str(e)}
 
