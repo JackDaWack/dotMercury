@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 
 from api.mail import router as messages_router
-from config import settings
+from config import Settings
 import server.server as server
 
-app = FastAPI(title=settings.APP_NAME)
+app = FastAPI(title=Settings().APP_NAME)
 
 app.include_router(messages_router)
 
@@ -13,7 +13,9 @@ async def root():
     print("Application has started")
     try:
         token = server.get_app_access_token()
-        print("Access Token:", token)
+        print("Access Token retrieved successfully!")
+        Settings().GRAPH_ACCESS_TOKEN = token
+
     except Exception as e:
         print(f"Failed to acquire access token: {e}")
     return {"message": "Welcome to the FastAPI application!"}
