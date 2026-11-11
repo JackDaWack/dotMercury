@@ -3,14 +3,14 @@ from msgraph import GraphServiceClient
 from azure.identity import InteractiveBrowserCredential
 import httpx
 
-from config import settings
+from config import Settings
 
 
 class GraphClient:
     def __init__(self, access_token: str):
         print(f"Initializing GraphClient with access token: {access_token}")
         self._client = httpx.AsyncClient(
-            base_url=settings.graph_base_url,
+            base_url=Settings().GRAPH_BASE_URL,
             headers={
                 "Authorization": f"Bearer {access_token}",
                 "Accept": "application/json",
