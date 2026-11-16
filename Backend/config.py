@@ -1,3 +1,4 @@
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,12 +11,19 @@ class Settings(BaseSettings):
     GRAPH_CLIENT_SECRET: str | None = None
     GRAPH_ACCESS_TOKEN: str | None = None
 
+    MICROSOFT_REDIRECT_URI: str = "http://localhost:8000/auth/callback"
 
+    # Frontend
+    FRONTEND_URL: str = "http://localhost:5173"
+
+    # Used to sign the session cookie
+    SESSION_SECRET: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
+
 
 settings = Settings()

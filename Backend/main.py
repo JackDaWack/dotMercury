@@ -1,12 +1,39 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 
-from api.mail import router as messages_router
-from config import Settings
-import server.server as server
+from app.config import settings
+from app.api import messages
+from app.auth import routes as auth_routes
 
-app = FastAPI(title=Settings().APP_NAME)
 
-app.include_router(messages_router)
+app = FastAPI(title=settings.app_name)
+
+
+# Allow the React frontend to communicate with FastAPI.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[settings.frontend_url],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# Signed cookie containing only the session identifier.
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=settings.session_secret,
+    session_cookie="email_client_session",
+    max_age=60 * 60 * 24 * 7,
+    same_site="lax",
+    https_only=settings.environment == "production",
+)
+
+
+app.include_router(messages.router)
+app.include_router(auth_routes.router)
+
 
 @app.get("/")
 async def root():
@@ -30,4 +57,3 @@ async def health_check():
     except Exception as e:
         print(f"Health check failed: {e}")
         return {"status": "error", "message": str(e)}
-
