@@ -9,7 +9,7 @@ import auth.routes as auth_routes
 from server import server
 
 
-app = FastAPI()
+app = FastAPI(title=Settings().APP_NAME, version="0.1.0", description="dotMercury development API")
 
 
 # Allow the React frontend to communicate with FastAPI.
