@@ -13,15 +13,15 @@ SCOPES = [
 
 AUTHORITY = (
     f"https://login.microsoftonline.com/"
-    f"{settings.microsoft_tenant_id}"
+    f"{settings.GRAPH_TENANT_ID}"
 )
 
 
 def create_msal_app(cache=None):
     return msal.ConfidentialClientApplication(
-        client_id=settings.microsoft_client_id,
+        client_id=settings.GRAPH_CLIENT_ID,
         authority=AUTHORITY,
-        client_credential=settings.microsoft_client_secret,
+        client_credential=settings.GRAPH_CLIENT_SECRET,
         token_cache=cache,
     )
 

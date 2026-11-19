@@ -4,12 +4,12 @@ from starlette.middleware.sessions import SessionMiddleware
 
 
 from config import Settings
-from api import messages
-from auth import routes as auth_routes
+import api.mail as mail
+import auth.routes as auth_routes
 from server import server
 
 
-app = FastAPI(title=Settings().app_name)
+app = FastAPI()
 
 
 # Allow the React frontend to communicate with FastAPI.
@@ -33,7 +33,7 @@ app.add_middleware(
 )
 
 
-app.include_router(messages.router)
+app.include_router(mail.router)
 app.include_router(auth_routes.router)
 
 
