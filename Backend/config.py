@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     GRAPH_TENANT_ID: str | None = None
     GRAPH_CLIENT_ID: str | None = None
     GRAPH_CLIENT_SECRET: str | None = None
-    GRAPH_ACCESS_TOKEN: str | None = None
+    graph_access_token: str | None = None
 
     MICROSOFT_REDIRECT_URI: str = "http://localhost:8000/auth/callback"
 

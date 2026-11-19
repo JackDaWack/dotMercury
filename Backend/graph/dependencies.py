@@ -14,13 +14,13 @@ async def get_graph_client() -> AsyncGenerator[GraphClient, None]:
             detail="Development token provider is disabled",
         )
 
-    if not Settings().GRAPH_ACCESS_TOKEN:
+    if not Settings().graph_access_token:
         raise HTTPException(
             status_code=503,
             detail="Graph access token is not configured",
         )
 
-    graph = GraphClient(Settings().GRAPH_ACCESS_TOKEN)
+    graph = GraphClient(Settings().graph_access_token)
 
     try:
         yield graph

@@ -2,18 +2,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
-from app.config import settings
-from app.api import messages
-from app.auth import routes as auth_routes
+
+from config import Settings
+from api import messages
+from auth import routes as auth_routes
+from server import server
 
 
-app = FastAPI(title=settings.app_name)
+app = FastAPI(title=Settings().app_name)
 
 
 # Allow the React frontend to communicate with FastAPI.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url],
+    allow_origins=[Settings().frontend_url],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,11 +25,11 @@ app.add_middleware(
 # Signed cookie containing only the session identifier.
 app.add_middleware(
     SessionMiddleware,
-    secret_key=settings.session_secret,
+    secret_key=Settings().session_secret,
     session_cookie="email_client_session",
     max_age=60 * 60 * 24 * 7,
     same_site="lax",
-    https_only=settings.environment == "production",
+    https_only=Settings().environment == "production",
 )
 
 
@@ -38,7 +40,7 @@ app.include_router(auth_routes.router)
 @app.get("/")
 async def root():
     print("Application has started")
-    if not Settings().GRAPH_ACCESS_TOKEN:
+    if not Settings().graph_access_token:
         try:
             token = server.get_app_access_token()
             print("Access Token retrieved successfully!")
