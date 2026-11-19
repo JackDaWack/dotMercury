@@ -20,7 +20,7 @@ AUTHORITY = (
 def create_msal_app(cache=None):
     return msal.ConfidentialClientApplication(
         client_id=settings.GRAPH_CLIENT_ID,
-        authority=AUTHORITY,
+        authority=settings.AUTHORITY,
         client_credential=settings.GRAPH_CLIENT_SECRET,
         token_cache=cache,
     )
@@ -32,7 +32,7 @@ def create_auth_flow():
 
     flow = app.initiate_auth_code_flow(
         scopes=SCOPES,
-        redirect_uri=settings.microsoft_redirect_uri,
+        redirect_uri=settings.GRAPH_REDIRECT_URI,
     )
 
     return flow, cache

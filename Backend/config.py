@@ -9,7 +9,6 @@ class Settings(BaseSettings):
     GRAPH_TENANT_ID: str | None = None
     GRAPH_CLIENT_ID: str | None = None
     GRAPH_CLIENT_SECRET: str | None = None
-    graph_access_token: str | None = None
 
     MICROSOFT_REDIRECT_URI: str = "http://localhost:8000/auth/callback"
 
@@ -18,6 +17,7 @@ class Settings(BaseSettings):
 
     # Used to sign the session cookie
     SESSION_SECRET: str
+    graph_access_token: str | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",
