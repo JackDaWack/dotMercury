@@ -15,7 +15,7 @@ app = FastAPI()
 # Allow the React frontend to communicate with FastAPI.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[Settings().frontend_url],
+    allow_origins=[Settings().FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,14 +23,14 @@ app.add_middleware(
 
 
 # Signed cookie containing only the session identifier.
-app.add_middleware(
-    SessionMiddleware,
-    secret_key=Settings().session_secret,
-    session_cookie="email_client_session",
-    max_age=60 * 60 * 24 * 7,
-    same_site="lax",
-    https_only=Settings().environment == "production",
-)
+#app.add_middleware(
+#    SessionMiddleware,
+#    secret_key=Settings().session_secret,
+#    session_cookie="email_client_session",
+#    max_age=60 * 60 * 24 * 7,
+#    same_site="lax",
+#    https_only=Settings().environment == "production",
+#)
 
 
 app.include_router(mail.router)
@@ -44,7 +44,6 @@ async def root():
         try:
             token = server.get_app_access_token()
             print("Access Token retrieved successfully!")
-            print("Access Token:", token)
         except Exception as e:
             print(f"Failed to acquire access token: {e}")
     else:

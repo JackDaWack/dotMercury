@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     FRONTEND_URL: str = "http://localhost:5173"
 
     # Used to sign the session cookie
-    SESSION_SECRET: str
+    #SESSION_SECRET: str
     graph_access_token: str | None = None
 
     model_config = SettingsConfigDict(
